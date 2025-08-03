@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <title>Code Assistance</title>
+  <script>
+    function showLoading() {
+      document.getElementById('loading-indicator').classList.remove('hidden');
+      document.getElementById('submit-btn').disabled = true;
+    }
+
+    function hideLoading() {
+      document.getElementById('loading-indicator').classList.add('hidden');
+      document.getElementById('submit-btn').disabled = false;
+    }
+  </script>
+</head>
+<body class="bg-gray-900 h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-gray-900 text-white py-4 shadow-md">
+    <div class="container mx-auto text-center text-5xl font-bold">
+      Coding Assistance
+    </div>
+  </header>
+
+  <!-- Chat Container -->
+  <main class="flex-grow container mx-auto p-4">
+    <div class="bg-gray-800 shadow-md rounded-lg p-4 h-[80vh] flex flex-col">
+      <!-- Chat Messages -->
+      <div id="chat-window" class="flex-grow overflow-y-auto mb-4">
+        <div class="bg-gray-500 p-2 rounded-lg my-2 text-gray-300">
+          <strong>AI:</strong> {{ai_content|safe}}
+        </div>
+      </div>
+
+      <!-- Loading Indicator Above Input -->
+      <div id="loading-indicator" class="hidden flex justify-center items-center mt-4 mb-4">
+        <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0116 0H4z"></path>
+        </svg>
+      </div>
+
+      <!-- User Input Form -->
+      <form method="post" action="{% url 'home' %}" class="flex items-center space-x-4" onsubmit="showLoading()">
+        {% csrf_token %}
+        <input 
+          type="text" 
+          name="problem" 
+          placeholder="Type your problem..." 
+          class="flex-grow bg-gray-300 p-2 border border-gray-600 rounded-lg focus:ring focus:ring-gray-600"
+        />
+        <button 
+          type="submit" 
+          id="submit-btn"
+          class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-2 text-center">
+   
+  </footer>
+
+  <script>
+    document.querySelector('form').onsubmit = async function (event) {
+      event.preventDefault();
+      showLoading();
+  
+      const form = event.target;
+      const formData = new FormData(form);
+  
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (response.ok) {
+          const result = await response.json();
+          document.getElementById('chat-window').innerHTML = `
+          <div class="bg-gray-500 p-2 rounded-lg my-2 text-gray-300">
+              <strong>AI:</strong> ${result.ai_content}
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error("Error submitting form", error);
+      } finally {
+        hideLoading();
+      }
+    };
+  </script>
+  
+</body>
+</html>
