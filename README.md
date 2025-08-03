@@ -31,7 +31,7 @@ cd Ai-Code-Assistant
 
 ### 2. Create and Activate a Virtual Environment
 
-```bash
+
 python -m venv venv
 source venv/bin/activate        # For Windows: venv\Scripts\activate
 ```
@@ -50,7 +50,7 @@ Create a file named `.env` in the root folder and add your Hugging Face API toke
 HUGGINGFACEHUB_API_KEY=your_huggingface_token_here
 ```
 
-Make sure not to share your token publicly.
+
 
 ---
 
