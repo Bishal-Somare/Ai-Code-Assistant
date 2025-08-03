@@ -1,32 +1,33 @@
-# Ai-Code-Assistant
-Awesome Bishal! Here's a **clean and focused `README.md`** version based on your instructions — no project structure diagram, just a clear definition, what’s used, and steps to install and run the project.
-
----
-
-````markdown
 # 🧠 AI Code Assistant
 
 A backend-powered **AI Code Assistant** built using **Hugging Face Transformers**, **LangChain**, and **Django**. This project allows users to input a coding problem and get AI-generated Python solutions using Hugging Face's `zephyr-7b-alpha` model.
 
 ---
 
-## 🔧 Technologies Used
+## ⚙️ **Technologies Used**
 
-- **LangChain** – For prompt formatting and managing interaction with the LLM
-- **Hugging Face Inference API** – To use the Zephyr model for text generation
-- **Django** – Backend framework for managing the web server
-- **python-decouple** – For secure API token management via `.env` file
+| Tool / Library           | Purpose                                                                 |
+|--------------------------|-------------------------------------------------------------------------|
+| 🧠 **LangChain**          | Building prompts and managing interactions with LLM                     |
+| 🤗 **Hugging Face API**   | Using the Zephyr model for generating Python code                       |
+| 🛠️ **Django**             | Web backend for handling views, routing, and project structure          |
+| 🔐 **python-decouple**    | Managing environment variables securely via a `.env` file               |
+| 🐍 **Python**             | Core programming language used in the entire project                    |
 
 ---
 
-## 📥 Installation Steps
+## 🚧 **Installation Steps**
 
-### 1. Clone the Repository
+Follow the steps below to set up and run the project on your local machine:
+
+---
+
+### 🔹 **Step 1: Clone the Repository**
 
 ```bash
 git clone https://github.com/Bishal-Somare/Ai-Code-Assistant.git
 cd Ai-Code-Assistant
-````
+
 
 ### 2. Create and Activate a Virtual Environment
 
